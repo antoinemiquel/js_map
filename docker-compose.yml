@@ -1,5 +1,5 @@
 web:
-  build: ./infra
+  build: ./src
   ports:
     - "80:8080"
   links:

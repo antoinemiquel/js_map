@@ -1,7 +1,9 @@
 var map
 var markers = new Array();
+var points
 
 function show_map() {
+    var startPoint = {"name" : "Notre Dame", "lat" : 48.85309478208657, "lon" : 2.348949909210205}
     map = L.map('map').setView([ startPoint["lat"], startPoint["lon"] ], 15);
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
     map.on('zoomend', function(e) {
@@ -10,7 +12,19 @@ function show_map() {
     map.on('moveend', function(e) {
         show_bounds(map);
     })
-    add_markers(map, points)
+    load_data()
+}
+
+function load_data() {
+    $.ajax({
+        url: document.location.href + "data",
+    })
+    .done(function(data) {
+        add_markers(map, data)
+    })
+    .fail(function() {
+        alert("Ajax failed to fetch data")
+    })
 }
 
 function show_bounds(map) {
