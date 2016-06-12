@@ -4,7 +4,7 @@ from urlparse import parse_qs
 from query import query_area, data_load, query_all
 
 app = Flask(__name__, template_folder='templates')
-client = MongoClient('localhost', 27017)
+client = MongoClient('db', 27017)
 db = client.autolib
 collection = db.points
 
