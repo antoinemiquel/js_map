@@ -12,12 +12,14 @@ collection = db.points
 @app.route('/')
 def accueil():
     if collection.count() == 0:
+        print("Data import :")
         with open('static/js/data.js') as json_data:
             points = json.load(json_data)
             json_data.close()
 
         for point in points:
             collection.insert(point)
+        print("ok")
     return render_template('index.html', titre="AutoLib")
 
 
